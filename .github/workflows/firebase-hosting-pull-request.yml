@@ -8,11 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npm ci && npm run build
+      - run: npm ci --prefix react-note && npm run build --prefix react-note
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_QUICK_STICKY_NOTES }}'
           projectId: quick-sticky-notes
+          entrypoint: react-note
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
