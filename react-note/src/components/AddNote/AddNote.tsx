@@ -8,12 +8,22 @@ import IconButton from "@material-ui/core/IconButton";
 import SettingsIcon from "@material-ui/icons/Settings";
 import MenuItem from "@material-ui/core/MenuItem";
 import { labels } from "../../utils/core.utils";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
+interface StyleInterface {
+  breakpoint: boolean;
+  [key: string]: any;
+}
+
+const getWidthWhenBreakPointChange = (props: StyleInterface) =>
+  props.breakpoint ? "100%" : 200;
 const useStyles = makeStyles((theme) => ({
   container: {
     margin: 10,
     display: "flex",
     flexWrap: "wrap",
+    flexDirection: (props: StyleInterface) =>
+      props.breakpoint ? "column" : "row",
 
     alignItems: "start",
     "& .div": {
@@ -23,23 +33,27 @@ const useStyles = makeStyles((theme) => ({
       flex: 1,
     },
     "& div.save": {
-      width: 200,
+      width: getWidthWhenBreakPointChange,
       "& button": {
-        width: 200,
+        width: getWidthWhenBreakPointChange,
         marginBottom: 5,
       },
       "& div": {
-        width: 200,
+        width: getWidthWhenBreakPointChange,
       },
     },
     "& .MuiTextField-root": {
-      width: "200px",
+      width: getWidthWhenBreakPointChange,
     },
   },
 }));
 
 export const AddNote = ({ save }: { save: Function }) => {
-  const classes = useStyles();
+  const matches = useMediaQuery("(max-width:700px)");
+
+  const classes = useStyles({
+    breakpoint: matches,
+  });
 
   const [value, setValue] = useState<string>("");
 
