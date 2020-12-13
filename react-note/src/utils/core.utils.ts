@@ -1,3 +1,4 @@
+import { createMuiTheme } from "@material-ui/core";
 import { DateFormat } from "../models/Notes";
 
 const nthFormatDay = function (d: number) {
@@ -64,3 +65,34 @@ export const labels = [
 export const getLabelName = (value: number) => {
   return labels[value].label;
 };
+
+// Themes
+
+const lightTheme = createMuiTheme({
+  palette: {
+    type: "light",
+  },
+});
+
+const defaultTheme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#00897b",
+    },
+    secondary: {
+      main: "#4db6ac",
+    },
+  },
+});
+
+const darkTheme = createMuiTheme({
+  palette: {
+    type: "dark",
+  },
+});
+
+export const AppThemes = [
+  { name: "light", value: lightTheme },
+  { name: "dark", value: darkTheme },
+  { name: "default", value: defaultTheme },
+];

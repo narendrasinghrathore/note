@@ -11,6 +11,7 @@ import Chip from "@material-ui/core/Chip";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteForever from "@material-ui/icons/DeleteForever";
 import { colors } from "@material-ui/core";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const getColorForLabel = (value: number) => {
   return [
@@ -21,11 +22,22 @@ const getColorForLabel = (value: number) => {
   ][value];
 };
 
+interface StyleProps {
+  note: Note;
+  breakpoint: boolean;
+}
+
+const getWidthWhenBreakPointChange = (props: StyleProps) =>
+  props.breakpoint ? "90vw" : 280;
+
+const getHeightWhenBreakPointChange = (props: StyleProps) =>
+  props.breakpoint ? 300 : 250;
+
 const useStyles = makeStyles({
   root: {
-    width: "280px",
+    width: getWidthWhenBreakPointChange,
     margin: 10,
-    minHeight: 180,
+    minHeight: getHeightWhenBreakPointChange,
     maxHeight: 200,
     display: "flex",
     flexDirection: "column",
@@ -45,7 +57,7 @@ const useStyles = makeStyles({
     },
   },
   label: {
-    backgroundColor: (props: Note) => getColorForLabel(props.label),
+    backgroundColor: (props: StyleProps) => getColorForLabel(props.note.label),
     color: "white",
   },
 });
@@ -59,7 +71,12 @@ export const NoteCard = ({
   complete: Function;
   remove: Function;
 }) => {
-  const classes = useStyles(note);
+  const matches = useMediaQuery("(max-width:700px)");
+
+  const classes = useStyles({
+    note: note,
+    breakpoint: matches,
+  });
 
   const textStrikeThrough = note.completed
     ? { textDecoration: "line-through", backgroundColor: "#dedede" }

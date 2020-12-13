@@ -48,7 +48,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const AddNote = ({ save }: { save: Function }) => {
+export const AddNote = ({
+  save,
+  drawer,
+}: {
+  save: Function;
+  drawer: Function;
+}) => {
   const matches = useMediaQuery("(max-width:700px)");
 
   const classes = useStyles({
@@ -81,6 +87,10 @@ export const AddNote = ({ save }: { save: Function }) => {
     };
     save(note);
     setValue("");
+  };
+
+  const handleSetting = () => {
+    drawer();
   };
 
   return (
@@ -117,7 +127,7 @@ export const AddNote = ({ save }: { save: Function }) => {
         </Button>
       </div>
       <div className="div">
-        <IconButton>
+        <IconButton onClick={handleSetting}>
           <SettingsIcon />
         </IconButton>
       </div>

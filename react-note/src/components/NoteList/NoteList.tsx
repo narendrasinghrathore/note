@@ -26,12 +26,6 @@ export const NoteList = ({
 }) => {
   const classes = useStyle();
 
-  const sortedList = list.slice(0).sort((a, b) => {
-    if (a.datetime > b.datetime) return -1;
-    if (a.datetime < b.datetime) return 1;
-    return 0;
-  });
-
   const markComplete = (note: Note) => {
     complete(note);
   };
@@ -41,6 +35,7 @@ export const NoteList = ({
   };
 
   const noItems = list.length === 0;
+  
   return (
     <div className={classes.rootContainer}>
       <>
@@ -52,7 +47,7 @@ export const NoteList = ({
         )}
       </>
       <div className={classes.container}>
-        {sortedList.map((note: Note, index: number) => (
+        {list.map((note: Note, index: number) => (
           <NoteCard
             remove={markDelete}
             key={index}
