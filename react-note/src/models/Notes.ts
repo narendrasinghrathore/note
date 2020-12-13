@@ -3,12 +3,7 @@ export interface Note {
   content: string;
   datetime: number;
   completed: boolean;
-  labels: Labels[];
-}
-
-export interface Labels {
-  id: string;
-  name: string;
+  label: number;
 }
 
 export interface DateFormat {
