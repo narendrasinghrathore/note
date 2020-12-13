@@ -5,7 +5,7 @@ import { AppThemes } from "../../utils/core.utils";
 import { AddNote } from "../AddNote/AddNote";
 import { DrawerMenu } from "../Drawer/Drawer";
 import { NoteList } from "../NoteList/NoteList";
-
+import Paper from "@material-ui/core/Paper/Paper";
 export const Home = () => {
   const [list, setList] = useState<Note[]>([]);
 
@@ -56,20 +56,22 @@ export const Home = () => {
   };
 
   return (
-    <>
+    <section style={{ height: "100vh" }}>
       <ThemeProvider theme={defaultTheme}>
-        <AddNote drawer={handleDrawer} save={handleNoteSubmit} />
-        <NoteList
-          remove={markRemove}
-          complete={markComplete}
-          list={sortedList}
-        />
-        <DrawerMenu
-          updateTheme={updateTheme}
-          open={drawer}
-          close={(value: boolean) => toggleDrawer(value)}
-        />
+        <Paper elevation={0} style={{ borderRadius: 0 }}>
+          <AddNote drawer={handleDrawer} save={handleNoteSubmit} />
+          <NoteList
+            remove={markRemove}
+            complete={markComplete}
+            list={sortedList}
+          />
+          <DrawerMenu
+            updateTheme={updateTheme}
+            open={drawer}
+            close={(value: boolean) => toggleDrawer(value)}
+          />
+        </Paper>
       </ThemeProvider>
-    </>
+    </section>
   );
 };

@@ -88,6 +88,12 @@ const defaultTheme = createMuiTheme({
 const darkTheme = createMuiTheme({
   palette: {
     type: "dark",
+    primary: {
+      main: "#000000",
+    },
+    secondary: {
+      main: "#dedede",
+    },
   },
 });
 

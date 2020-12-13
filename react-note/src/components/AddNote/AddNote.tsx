@@ -19,7 +19,6 @@ const getWidthWhenBreakPointChange = (props: StyleInterface) =>
   props.breakpoint ? "100%" : 200;
 const useStyles = makeStyles((theme) => ({
   container: {
-    margin: 10,
     display: "flex",
     flexWrap: "wrap",
     flexDirection: (props: StyleInterface) =>
@@ -104,6 +103,7 @@ export const AddNote = ({
         multiline
         rows={4}
         variant="filled"
+        color="primary"
         onChange={handleNoteChange}
       />
 

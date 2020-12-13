@@ -93,7 +93,7 @@ export const NoteCard = ({
   const btnText = note.completed ? "Undo" : "Mark Complete";
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} elevation={4}>
       <CardContent className={classes.cardContent} style={textStrikeThrough}>
         <Typography
           className={classes.title}
