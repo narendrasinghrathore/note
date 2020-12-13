@@ -1,7 +1,6 @@
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { green, red } from "@material-ui/core/colors";
 import { useState } from "react";
-import { isNotEmittedStatement } from "typescript";
 import { Note } from "../../models/Notes";
 import { AddNote } from "../AddNote/AddNote";
 import { NoteList } from "../NoteList/NoteList";
