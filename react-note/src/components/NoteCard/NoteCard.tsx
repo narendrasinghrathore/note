@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -73,14 +73,19 @@ export const NoteCard = ({
 }) => {
   const matches = useMediaQuery("(max-width:700px)");
 
+  const theme = useTheme();
+
   const classes = useStyles({
     note: note,
     breakpoint: matches,
   });
 
   const textStrikeThrough = note.completed
-    ? { textDecoration: "line-through", backgroundColor: "#dedede" }
-    : { textDecoration: "none" };
+    ? {
+        textDecoration: "line-through",
+        backgroundColor: theme.palette.grey[600],
+      }
+    : { textDecoration: "none", backgroundColor: theme.palette.primary.main };
 
   const markComplete = () => {
     complete(note);
@@ -93,8 +98,8 @@ export const NoteCard = ({
   const btnText = note.completed ? "Undo" : "Mark Complete";
 
   return (
-    <Card className={classes.root} elevation={4}>
-      <CardContent className={classes.cardContent} style={textStrikeThrough}>
+    <Card color="primary" style={textStrikeThrough} className={classes.root} elevation={4}>
+      <CardContent className={classes.cardContent}>
         <Typography
           className={classes.title}
           color="textSecondary"
@@ -111,7 +116,10 @@ export const NoteCard = ({
         <Button size="small" onClick={markComplete}>
           {btnText}
         </Button>
-        <IconButton onClick={markDelete} aria-label="delete note forever">
+        <IconButton
+          onClick={markDelete}
+          aria-label="delete note forever"
+        >
           <DeleteForever />
         </IconButton>
       </CardActions>

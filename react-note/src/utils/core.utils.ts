@@ -77,11 +77,16 @@ const lightTheme = createMuiTheme({
 const defaultTheme = createMuiTheme({
   palette: {
     primary: {
-      main: "#00897b",
+      main: '#ffb300',
     },
     secondary: {
-      main: "#4db6ac",
+      main: '#81c784',
     },
+    background: {
+      default: "#dedede",
+      paper: "#dedede",
+    },
+    
   },
 });
 

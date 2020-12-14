@@ -51,14 +51,13 @@ export const Home = () => {
   const updateTheme = (name: string) => {
     const theme = AppThemes.find((item) => item.name === name);
     if (!theme) return;
-    console.log(theme?.value);
     setDefaultTheme(theme?.value);
   };
 
   return (
-    <section style={{ height: "100vh" }}>
+    <section style={{ height: "100%" }}>
       <ThemeProvider theme={defaultTheme}>
-        <Paper elevation={0} style={{ borderRadius: 0 }}>
+        <Paper elevation={0} style={{ borderRadius: 0, height: "100%" }}>
           <AddNote drawer={handleDrawer} save={handleNoteSubmit} />
           <NoteList
             remove={markRemove}
