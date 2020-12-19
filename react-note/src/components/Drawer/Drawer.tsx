@@ -6,7 +6,7 @@ import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
 import Brightness2Icon from "@material-ui/icons/Brightness2";
 import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
 
-export const DrawerMenu = ({
+const DrawerMenu = ({
   open,
   close,
   updateTheme,
@@ -56,3 +56,4 @@ export const DrawerMenu = ({
     </Drawer>
   );
 };
+export default DrawerMenu;

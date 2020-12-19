@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const AddNote = ({
+const AddNote = ({
   save,
   drawer,
 }: {
@@ -134,3 +134,4 @@ export const AddNote = ({
     </div>
   );
 };
+export default AddNote;

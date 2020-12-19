@@ -15,7 +15,7 @@ const useStyle = makeStyles({
 });
 
 //Component
-export const NoteList = ({
+const NoteList = ({
   list,
   complete,
   remove,
@@ -35,7 +35,7 @@ export const NoteList = ({
   };
 
   const noItems = list.length === 0;
-  
+
   return (
     <div className={classes.rootContainer}>
       <>
@@ -59,3 +59,4 @@ export const NoteList = ({
     </div>
   );
 };
+export default NoteList;

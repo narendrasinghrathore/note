@@ -1,12 +1,14 @@
+import { lazy, useEffect, useState } from "react";
 import { Theme, ThemeProvider } from "@material-ui/core";
-import { useEffect, useState } from "react";
 import { Note } from "../../models/Notes";
 import { AppThemes } from "../../utils/core.utils";
-import { AddNote } from "../AddNote/AddNote";
-import { DrawerMenu } from "../Drawer/Drawer";
-import { NoteList } from "../NoteList/NoteList";
 import Paper from "@material-ui/core/Paper/Paper";
 import StorageService from "../../utils/storage.utils";
+import LazyLoadingComponent from "../../shared/LazyLoadingComponent";
+//Lazy Loading component
+const AddNote = lazy(() => import("../AddNote/AddNote"));
+const DrawerMenu = lazy(() => import("../Drawer/Drawer"));
+const NoteList = lazy(() => import("../NoteList/NoteList"));
 export const Home = () => {
   const [list, setList] = useState<Note[]>([]);
 
@@ -73,17 +75,23 @@ export const Home = () => {
     <section style={{ height: "100%" }}>
       <ThemeProvider theme={defaultTheme}>
         <Paper elevation={0} style={{ borderRadius: 0, height: "100%" }}>
-          <AddNote drawer={handleDrawer} save={handleNoteSubmit} />
-          <NoteList
-            remove={markRemove}
-            complete={markComplete}
-            list={sortedList}
-          />
-          <DrawerMenu
-            updateTheme={updateTheme}
-            open={drawer}
-            close={(value: boolean) => toggleDrawer(value)}
-          />
+          <LazyLoadingComponent>
+            <AddNote drawer={handleDrawer} save={handleNoteSubmit} />
+          </LazyLoadingComponent>
+          <LazyLoadingComponent>
+            <NoteList
+              remove={markRemove}
+              complete={markComplete}
+              list={sortedList}
+            />
+          </LazyLoadingComponent>
+          <LazyLoadingComponent>
+            <DrawerMenu
+              updateTheme={updateTheme}
+              open={drawer}
+              close={(value: boolean) => toggleDrawer(value)}
+            />
+          </LazyLoadingComponent>
         </Paper>
       </ThemeProvider>
     </section>
