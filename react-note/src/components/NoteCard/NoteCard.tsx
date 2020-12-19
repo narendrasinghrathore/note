@@ -104,6 +104,7 @@ export const NoteCard = ({
           className={classes.title}
           color="textSecondary"
           gutterBottom
+          component="div"
         >
           {getFormattedDate({ datetime: note.datetime, monthFormat: "MMM" })}{" "}
           <Chip className={classes.label} label={getLabelName(note.label)} />

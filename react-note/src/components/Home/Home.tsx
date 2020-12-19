@@ -1,13 +1,21 @@
 import { Theme, ThemeProvider } from "@material-ui/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Note } from "../../models/Notes";
 import { AppThemes } from "../../utils/core.utils";
 import { AddNote } from "../AddNote/AddNote";
 import { DrawerMenu } from "../Drawer/Drawer";
 import { NoteList } from "../NoteList/NoteList";
 import Paper from "@material-ui/core/Paper/Paper";
+import StorageService from "../../utils/storage.utils";
 export const Home = () => {
   const [list, setList] = useState<Note[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const data: Note[] = await StorageService.getAll();
+      setList(data);
+    })();
+  }, []);
 
   const sortedList = list.slice(0).sort((a, b) => {
     if (a.datetime > b.datetime) return -1;
@@ -17,7 +25,9 @@ export const Home = () => {
 
   const handleNoteSubmit = (note: Note) => {
     if (note) {
-      setList([...list, note]);
+      StorageService.add(note.id, note).then(() => {
+        setList([...list, note]);
+      });
     }
   };
 
@@ -31,15 +41,20 @@ export const Home = () => {
     const { id } = note;
     const index = list.findIndex((item) => item.id === id);
     const updateList = list.slice(0);
-    updateList.splice(index, 1, { ...note, completed: !note.completed });
-    setList([...updateList]);
+    const completedNote = { ...note, completed: !note.completed };
+    updateList.splice(index, 1, completedNote);
+    StorageService.set(completedNote.id, completedNote).then(() => {
+      setList([...updateList]);
+    });
   };
 
   const markRemove = (id: string) => {
     const index = list.findIndex((item) => item.id === id);
     const updateList = list.slice(0);
-    updateList.splice(index, 1);
-    setList([...updateList]);
+    StorageService.delete(id).then(() => {
+      updateList.splice(index, 1);
+      setList([...updateList]);
+    });
   };
 
   const handleDrawer = () => {

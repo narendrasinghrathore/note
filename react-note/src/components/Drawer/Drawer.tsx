@@ -38,19 +38,18 @@ export const DrawerMenu = ({
   return (
     <Drawer anchor={drawerPosition} open={open} onClose={onClose}>
       <Box>
-        {AppThemes.map((item) => {
+        {AppThemes.map((item, index) => {
           return (
-            <>
-              <IconButton
-                data-theme={item.name}
-                aria-label={item.name}
-                onClick={changeTheme}
-              >
-                {item.name === "light" && <BrightnessLowIcon />}
-                {item.name === "dark" && <Brightness2Icon />}
-                {item.name === "default" && <BrightnessHighIcon />}
-              </IconButton>
-            </>
+            <IconButton
+              data-theme={item.name}
+              aria-label={item.name}
+              onClick={changeTheme}
+              key={index}
+            >
+              {item.name === "light" && <BrightnessLowIcon />}
+              {item.name === "dark" && <Brightness2Icon />}
+              {item.name === "default" && <BrightnessHighIcon />}
+            </IconButton>
           );
         })}
       </Box>
