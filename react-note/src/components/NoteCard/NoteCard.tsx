@@ -98,7 +98,12 @@ export const NoteCard = ({
   const btnText = note.completed ? "Undo" : "Mark Complete";
 
   return (
-    <Card color="primary" style={textStrikeThrough} className={classes.root} elevation={4}>
+    <Card
+      color="primary"
+      style={textStrikeThrough}
+      className={classes.root}
+      elevation={4}
+    >
       <CardContent className={classes.cardContent}>
         <Typography
           className={classes.title}
@@ -107,20 +112,17 @@ export const NoteCard = ({
           component="div"
         >
           {getFormattedDate({ datetime: note.datetime, monthFormat: "MMM" })}{" "}
-          <Chip className={classes.label} label={getLabelName(note.label)} />
         </Typography>
         <Typography variant="h5" component="h2">
           {note.content}
         </Typography>
       </CardContent>
       <CardActions className={classes.actions}>
+        <Chip className={classes.label} label={getLabelName(note.label)} />
         <Button size="small" onClick={markComplete}>
           {btnText}
         </Button>
-        <IconButton
-          onClick={markDelete}
-          aria-label="delete note forever"
-        >
+        <IconButton onClick={markDelete} aria-label="delete note forever">
           <DeleteForever />
         </IconButton>
       </CardActions>
