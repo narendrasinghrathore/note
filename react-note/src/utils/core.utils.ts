@@ -14,6 +14,7 @@ const nthFormatDay = function (d: number) {
       return "th";
   }
 };
+
 export const getFormattedDate = (dateFormat: DateFormat): string => {
   const datetime = dateFormat.datetime;
   const date = datetime ? new Date(datetime) : new Date();

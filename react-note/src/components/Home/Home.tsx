@@ -72,9 +72,9 @@ export const Home = () => {
   };
 
   return (
-    <section style={{ height: "100%" }}>
+    <section style={{ minHeight: "100%" }}>
       <ThemeProvider theme={defaultTheme}>
-        <Paper elevation={0} style={{ borderRadius: 0, height: "100%" }}>
+        <Paper elevation={0} style={{ borderRadius: 0, minHeight: "100%" }}>
           <LazyLoadingComponent>
             <AddNote drawer={handleDrawer} save={handleNoteSubmit} />
           </LazyLoadingComponent>
