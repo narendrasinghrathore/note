@@ -5,7 +5,11 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Note } from "../../models/Notes";
-import { getFormattedDate, getLabelName } from "../../utils/core.utils";
+import {
+  getFormattedDate,
+  getLabelName,
+  NoteLabels,
+} from "../../utils/core.utils";
 import Chip from "@material-ui/core/Chip";
 
 import IconButton from "@material-ui/core/IconButton";
@@ -13,13 +17,13 @@ import DeleteForever from "@material-ui/icons/DeleteForever";
 import { colors } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
-const getColorForLabel = (value: number) => {
+const getColorForLabel = (label: string) => {
   return [
-    colors.grey[800],
-    colors.orange[600],
-    colors.red[800],
-    colors.indigo[800],
-  ][value];
+    { label: NoteLabels.low, value: colors.grey[800] },
+    { label: NoteLabels.medium, value: colors.orange[600] },
+    { label: NoteLabels.high, value: colors.red[800] },
+    { label: NoteLabels.bug, value: colors.indigo[800] },
+  ].find((item) => item.label === label)?.value;
 };
 
 interface StyleProps {

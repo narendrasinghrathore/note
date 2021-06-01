@@ -3,7 +3,7 @@ export interface Note {
   content: string;
   datetime: number;
   completed: boolean;
-  label: number;
+  label: string;
 }
 
 export interface DateFormat {

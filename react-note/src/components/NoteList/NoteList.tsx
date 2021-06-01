@@ -1,16 +1,19 @@
 import { Note } from "../../models/Notes";
 import { makeStyles } from "@material-ui/core";
-import { NoteCard } from "../NoteCard/NoteCard";
+import NoteColumn from "./../NoteColumn/NoteColumn";
+import { labels, NoteLabels } from "../../utils/core.utils";
 
 const useStyle = makeStyles({
   rootContainer: {
     display: "flex",
     justifyContent: "center",
+    width: "100vw",
+    height: "100%",
   },
   container: {
     display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
+    width: "100vw",
+    flex: 1,
   },
 });
 
@@ -36,6 +39,12 @@ const NoteList = ({
 
   const noItems = list.length === 0;
 
+  const columns = labels;
+
+  const getFilteredList = (label: NoteLabels) => {
+    return list.filter((note) => note.label === label);
+  };
+
   return (
     <div className={classes.rootContainer}>
       <>
@@ -47,12 +56,13 @@ const NoteList = ({
         )}
       </>
       <div className={classes.container}>
-        {list.map((note: Note, index: number) => (
-          <NoteCard
-            remove={markDelete}
+        {columns.map((column, index: number) => (
+          <NoteColumn
+            title={column.label}
             key={index}
-            note={note}
+            list={getFilteredList(column.label)}
             complete={markComplete}
+            remove={markDelete}
           />
         ))}
       </div>

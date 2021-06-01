@@ -44,27 +44,34 @@ export const getFormattedDate = (dateFormat: DateFormat): string => {
   )}, ${month},${year} : ${hours}:${minute} ${ampm}`;
 };
 
+export enum NoteLabels {
+  low = "low",
+  medium = "medium",
+  high = "high",
+  bug = "bug",
+}
+
 export const labels = [
   {
-    value: 0,
-    label: "low",
+    value: NoteLabels.low,
+    label: NoteLabels.low,
   },
   {
-    value: 1,
-    label: "medium",
+    value: NoteLabels.medium,
+    label: NoteLabels.medium,
   },
   {
-    value: 2,
-    label: "high",
+    value: NoteLabels.high,
+    label: NoteLabels.high,
   },
   {
-    value: 3,
-    label: "bug",
+    value: NoteLabels.bug,
+    label: NoteLabels.bug,
   },
 ];
 
-export const getLabelName = (value: number) => {
-  return labels[value].label;
+export const getLabelName = (value: string) => {
+  return labels.find((label) => label.value === value)?.label;
 };
 
 // Themes
@@ -78,16 +85,15 @@ const lightTheme = createMuiTheme({
 const defaultTheme = createMuiTheme({
   palette: {
     primary: {
-      main: '#ffb300',
+      main: "#ffb300",
     },
     secondary: {
-      main: '#81c784',
+      main: "#81c784",
     },
     background: {
       default: "#dedede",
       paper: "#dedede",
     },
-    
   },
 });
 

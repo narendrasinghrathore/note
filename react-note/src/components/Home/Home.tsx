@@ -4,12 +4,28 @@ import { Note } from "../../models/Notes";
 import { AppThemes } from "../../utils/core.utils";
 import Paper from "@material-ui/core/Paper/Paper";
 import StorageService from "../../utils/storage.utils";
+import { makeStyles } from "@material-ui/core/styles";
+
 import LazyLoadingComponent from "../../shared/LazyLoadingComponent";
 //Lazy Loading component
 const AddNote = lazy(() => import("../AddNote/AddNote"));
 const DrawerMenu = lazy(() => import("../Drawer/Drawer"));
 const NoteList = lazy(() => import("../NoteList/NoteList"));
+
+const useStyle = makeStyles({
+  rootContainer: {
+    display: "flex",
+    flexDirection: "column",
+    overflow:'hidden'
+  },
+  noteList: {
+    flex: 1,
+  },
+});
+
 export const Home = () => {
+  const classess = useStyle();
+
   const [list, setList] = useState<Note[]>([]);
 
   useEffect(() => {
@@ -74,16 +90,20 @@ export const Home = () => {
   return (
     <section style={{ minHeight: "100%", display: "flex" }}>
       <ThemeProvider theme={defaultTheme}>
-        <Paper elevation={0} style={{ borderRadius: 0, flex: 1 }}>
+        <Paper elevation={0} className={classess.rootContainer}>
           <LazyLoadingComponent>
-            <AddNote drawer={handleDrawer} save={handleNoteSubmit} />
+            <section className="add-note">
+              <AddNote drawer={handleDrawer} save={handleNoteSubmit} />
+            </section>
           </LazyLoadingComponent>
           <LazyLoadingComponent>
-            <NoteList
-              remove={markRemove}
-              complete={markComplete}
-              list={sortedList}
-            />
+            <section className={classess.noteList}>
+              <NoteList
+                remove={markRemove}
+                complete={markComplete}
+                list={sortedList}
+              />
+            </section>
           </LazyLoadingComponent>
           <LazyLoadingComponent>
             <DrawerMenu

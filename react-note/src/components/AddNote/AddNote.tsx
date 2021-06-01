@@ -47,13 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AddNote = ({
-  save,
-  drawer,
-}: {
-  save: Function;
-  drawer: Function;
-}) => {
+const AddNote = ({ save, drawer }: { save: Function; drawer: Function }) => {
   const matches = useMediaQuery("(max-width:700px)");
 
   const classes = useStyles({
@@ -69,7 +63,7 @@ const AddNote = ({
     setValue(value);
   };
 
-  const [label, setLabel] = useState(0);
+  const [label, setLabel] = useState("");
 
   const handleChange = (event: any) => {
     setLabel(event.target.value);
